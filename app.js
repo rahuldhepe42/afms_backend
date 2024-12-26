@@ -28,14 +28,14 @@ mongoose.connect(mongoURl, {
     useUnifiedTopology: true,
 }).then(() => {
     console.log("connected to database")
-}).catch(e => console.log(e));   
+}).catch(e => console.log(e));
 
 
 
 
 // apply endpoint
 app.post("/register", async (req, res) => {
-    const { name, email, mobileNumber, city, state, applyfor, workexperience,  } = req.body;
+    const { name, email, mobileNumber, city, state, applyfor, workexperience, } = req.body;
 
 
     try {
@@ -66,7 +66,7 @@ app.post("/register", async (req, res) => {
 
 // contact endpoint
 app.post("/contact", async (req, res) => {
-    const { companyname, servicename, email, phoneNumber, message} = req.body;
+    const { companyname, servicename, email, phoneNumber, message } = req.body;
 
 
     try {
@@ -134,6 +134,12 @@ app.delete("/contacts/:id", async (req, res) => {
     }
 });
 
+
+
+
+app.get('/config', (req, res) => {
+    res.json({ baseURL: process.env.BASE_URL || "http://localhost:5000" }); // Fallback to local for dev
+});
 
 const port = process.env.PORT || 5001;
 
